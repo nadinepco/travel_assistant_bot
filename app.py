@@ -26,6 +26,8 @@ st.markdown(
     """
 This application helps you retrieve relevant details from your travel-related documents (such as hotel bookings, flight details, and activities). 
 You can also browse and view your travel documents (PDFs) directly within the app.
+
+**Note:** If you choose the OpenAI model, you must input your OpenAI API key to enable the question input.
 """
 )
 
@@ -47,6 +49,15 @@ with tab1:
 
     # Set up RAG chain with user's choice of LLM
     llm_choice = st.selectbox("Choose an LLM:", ["groq", "openai"])
+
+    # OpenAI API Key Input (Only required if the OpenAI model is chosen)
+    openai_api_key = None
+    if llm_choice == "openai":
+        openai_api_key = st.text_input("Enter your OpenAI API key:", type="password")
+        if not openai_api_key:
+            st.warning("Please enter your OpenAI API key to use the OpenAI model.")
+            st.stop()  # Stop the app until the API key is provided
+
     rag_chain = RAGChain(retriever=retriever, llm_type=llm_choice)
 
     # Question input and response generation
@@ -87,4 +98,3 @@ with tab2:
         # Display the PDF directly in the app (embed it)
         st.markdown(f"Viewing: {selected_pdf}")
         pdf_viewer(pdf_data)
-        # st.markdown(f'<iframe src="data:application/pdf;base64,{pdf_data.decode("latin1")}" width="700" height="800" type="application/pdf"></iframe>', unsafe_allow_html=True)
