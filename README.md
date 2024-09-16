@@ -28,6 +28,26 @@ You can find the data in [data](data) and the processed_data(chunks) in [data/pr
 - [LangChain](https://langchain.readthedocs.io/en/latest/index.html): Framework for managing and chaining language models and prompts
 - [Streamlit](https://streamlit.io/): For creating the web interface of the chatbot
 - [Chroma](https://python.langchain.com/v0.2/docs/integrations/vectorstores/chroma/): For vectorestore and search
+- [MultiVectorRetriever LangChain](https://python.langchain.com/v0.1/docs/modules/data_connection/retrievers/multi_vector/): To efficiently retrieve and link chunked documents with their parent documents, enhancing the precision and scalability of document retrieval.
+
+### MultiVectorRetriever in LangChain
+
+In this project, I utilized the **MultiVectorRetriever** from LangChain as the main retrieval mechanism. The **MultiVectorRetriever** is a specialized retriever that allows combining multiple types of embeddings and retrieval strategies, enhancing the flexibility and performance of the retrieval process. It works by creating separate vector indexes for different chunks of documents (child documents) and linking them to their parent documents. Travel Document size are relatively small hence this approach was also possible.
+
+#### Why I Used MultiVectorRetriever
+
+1. **Parent-Child Relationship Between Documents**: 
+   - The `MultiVectorRetriever` is particularly useful when dealing with both chunked (child) and raw (parent) documents. In this project, travel-related PDFs are processed into thematic chunks, and each chunk is treated as a child document. The raw, unprocessed versions of these documents act as the parent documents.
+   - **Linking child chunks to parent documents** ensures that we can retrieve relevant chunks while preserving the context of the original, raw documents.
+
+2. **Efficient Chunk-Level Retrieval**:
+   - The travel documents were chunked into meaningful sections based on their content (e.g., hotel details, flight information). The `MultiVectorRetriever` makes it possible to retrieve the most relevant chunks of information based on user queries, improving both precision and speed.
+
+3. **Multi-Vector Flexibility**:
+   - The `MultiVectorRetriever` supports multiple types of vector embeddings, making it ideal for fine-tuning the retrieval process. For this project, I used embeddings from OpenAI's API (via `OpenAIEmbeddings`), which are highly performant for semantic search tasks.
+   - This retriever can be extended to include different types of embeddings, such as those for semantic similarity and other specialized tasks.
+
+By leveraging **MultiVectorRetriever**, the retrieval process becomes more modular and scalable, allowing the system to efficiently handle large, unstructured travel documents while maintaining context and relevance for each user query.
 
 ## Local Setup
 1. Prerequisites
