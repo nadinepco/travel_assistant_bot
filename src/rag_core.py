@@ -1,3 +1,8 @@
+import sys
+import pysqlite3 as sqlite3
+
+sys.modules["sqlite3"] = sqlite3
+
 import json
 from typing import Iterable
 from langchain_core.documents import Document
