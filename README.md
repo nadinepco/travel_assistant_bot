@@ -82,18 +82,9 @@ Given the multi-document nature of the dataset, the retrieval performance at bot
 ### RAG Flow and RAG Evaluation
 The RAG was evaluated using LLM-as-a-Judge (with gpt-4o) for checking if the answer is relevant, partially relevant or non-relevant.
 Admittedly, this is a metric I shouldn't consider as all the files are related to travel bookings, hence the high result as relevant.
-- RELEVANT           96%
-- PARTLY_RELEVANT    3%
-- NON_RELEVANT       1%
-
-## Running it
-I used conda environment with Python 3.11
-
-### Dataset 
-LLM-Based Intelligent Chunking
-Manually generated PDF files
-
-
+- Relevant           96%
+- Partly_relevant    3%
+- Non_relevant       1%
 
 ### Resources:
 * [5 Levels of Text Splitting for Retrieval](https://www.youtube.com/watch?v=8OJC21T2SL4&t=2882s)
